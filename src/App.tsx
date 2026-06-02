@@ -1,17 +1,33 @@
-import Card, { CardBody, CardBodyTwo } from "./components/Card";
+import Card, { CardBody } from "./components/Card";
 import List from "./components/List";
+import Title from "./components/Title";
+import Button from "./components/Button";
+import ButtonDelete from "./components/ButtonDelete";
+import { useState } from "react";
 
 function App() {
-  const list = ["Papas", "Zapallo", "Sandia", "Naranja"];
-  const list2 = ["Porotos", "Lentejas", "Fideos", "Arroz"];
+  const [elementos, setElementos] = useState([
+    "Papas",
+    "Zapallo",
+    "Sandia",
+    "Naranja",
+  ]);
+
+  const addMinion = () => setElementos([...elementos, "Minion"]);
+
+  const delMinion = () => setElementos(elementos.slice(0, -1));
+
   return (
-    <Card>
-      <CardBody title="Frutas y verduras" text="Seleccione con un click" />
-      <List data={list} />
-      <CardBody title=" " />
-      <CardBodyTwo title="Abarrotes" text="Seleccion con un click" />
-      <List data={list2} />
-    </Card>
+    <>
+      <Title title="MiniMarket" desc="Ventas online" />
+
+      <Card>
+        <CardBody title="Frutas y verduras" text="Seleccione con un click" />
+        <Button onClick={addMinion}>Agregar</Button>{" "}
+        <Button onClick={delMinion}>Eliminar</Button>
+        <List data={elementos} />
+      </Card>
+    </>
   );
 }
 
